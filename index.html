@@ -2,360 +2,101 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Translator Bisnis ID ↔ 中文</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>BizTranslate — ID ↔ 中文</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0f0f0f;
-    --bg2: #161616;
-    --bg3: #1e1e1e;
-    --border: rgba(255,255,255,0.08);
-    --border2: rgba(255,255,255,0.14);
-    --text: #f0ede8;
-    --text2: #9a9690;
-    --text3: #5a5754;
-    --accent: #e8c84a;
-    --accent2: #c8a832;
-    --red: #e05c4a;
-    --green: #4ac88a;
-    --blue: #4a9ee8;
-    --radius: 10px;
-    --radius-sm: 6px;
-    --mono: 'IBM Plex Mono', monospace;
-    --sans: 'Plus Jakarta Sans', sans-serif;
-    --zh: 'Noto Sans SC', sans-serif;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
-  body {
-    font-family: var(--sans);
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+:root {
+  --bg:#0f0f0f;--bg2:#161616;--bg3:#1e1e1e;
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.15);
+  --text:#f0ede8;--text2:#9a9690;--text3:#5a5754;
+  --accent:#e8c84a;--accent2:#c8a832;
+  --red:#e05c4a;--green:#4ac88a;
+  --radius:10px;--radius-sm:6px;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Plus Jakarta Sans',sans-serif;
+  --zh:'Noto Sans SC',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
 
-  /* TOP BAR */
-  .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg2);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .logo-icon {
-    width: 30px;
-    height: 30px;
-    background: var(--accent);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 500;
-    color: #0f0f0f;
-    letter-spacing: -0.5px;
-  }
-  .logo-text {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    letter-spacing: -0.3px;
-  }
-  .logo-sub {
-    font-size: 11px;
-    color: var(--text3);
-    font-family: var(--mono);
-  }
-  .status-pill {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-family: var(--mono);
-    color: var(--text3);
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 4px 10px;
-  }
-  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
-  .dot.loading { background: var(--accent); animation: pulse 1s infinite; }
-  .dot.error { background: var(--red); }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--bg2);position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:30px;height:30px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:500;color:#0f0f0f;}
+.logo-text{font-size:14px;font-weight:600;color:var(--text);}
+.logo-sub{font-size:10px;color:var(--text3);font-family:var(--mono);}
+.status-pill{display:flex;align-items:center;gap:6px;font-size:11px;font-family:var(--mono);color:var(--text3);background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 10px;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);}
+.dot.loading{background:var(--accent);animation:pulse 1s infinite;}
+.dot.error{background:var(--red);}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 
-  /* MAIN */
-  main { flex: 1; padding: 16px; max-width: 900px; width: 100%; margin: 0 auto; }
+main{flex:1;padding:14px;max-width:860px;width:100%;margin:0 auto;}
 
-  /* SMART INPUT INDICATOR */
-  .smart-bar {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 8px 12px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    min-height: 34px;
-    transition: border-color 0.2s;
-  }
-  .smart-bar.active { border-color: var(--accent); }
-  .smart-label {
-    font-family: var(--mono);
-    color: var(--text3);
-    font-size: 11px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .smart-chips { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; }
-  .smart-chip {
-    background: rgba(232,200,74,0.1);
-    border: 1px solid rgba(232,200,74,0.25);
-    border-radius: 4px;
-    padding: 2px 7px;
-    font-size: 11px;
-    font-family: var(--mono);
-    color: var(--accent);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .smart-chip .arrow { color: var(--text3); }
-  .smart-chip .fixed { color: var(--text); }
+.smart-bar{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 12px;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-size:12px;min-height:32px;transition:border-color 0.2s;}
+.smart-bar.active{border-color:var(--accent);}
+.smart-label{font-family:var(--mono);color:var(--text3);font-size:11px;white-space:nowrap;flex-shrink:0;}
+.smart-chips{display:flex;flex-wrap:wrap;gap:5px;flex:1;}
+.smart-chip{background:rgba(232,200,74,0.1);border:1px solid rgba(232,200,74,0.25);border-radius:4px;padding:2px 7px;font-size:11px;font-family:var(--mono);color:var(--accent);display:flex;align-items:center;gap:4px;}
+.smart-chip .arr{color:var(--text3);}
+.smart-chip .fix{color:var(--text);}
 
-  /* PANELS */
-  .panels {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  @media (max-width: 600px) {
-    .panels { grid-template-columns: 1fr; }
-  }
-  .panel {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  .panel-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
-  }
-  .lang-badge {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text);
-  }
-  .flag { font-size: 18px; }
-  .char-ct { font-size: 11px; font-family: var(--mono); color: var(--text3); }
-  textarea {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    resize: none;
-    font-size: 15px;
-    font-family: var(--sans);
-    line-height: 1.65;
-    color: var(--text);
-    padding: 14px;
-    min-height: 140px;
-    caret-color: var(--accent);
-  }
-  textarea::placeholder { color: var(--text3); }
-  textarea.zh-font { font-family: var(--zh); }
-  .panel-foot {
-    padding: 8px 14px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+.qp-label{font-size:11px;font-family:var(--mono);color:var(--text3);margin-bottom:7px;}
+.qp-scroll{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px;scrollbar-width:none;}
+.qp-scroll::-webkit-scrollbar{display:none;}
+.qp-chip{flex-shrink:0;font-size:12px;padding:5px 11px;border:1px solid var(--border);border-radius:20px;cursor:pointer;color:var(--text2);background:var(--bg3);white-space:nowrap;transition:all 0.15s;}
+.qp-chip:hover{border-color:var(--accent);color:var(--accent);}
 
-  /* RESULT PANEL */
-  .result-panel {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 10px;
-    overflow: hidden;
-    display: none;
-  }
-  .result-panel.visible { display: block; }
-  .result-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg3);
-  }
-  .result-body {
-    padding: 14px;
-    font-size: 15px;
-    line-height: 1.7;
-    min-height: 60px;
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-  .result-body.zh-font { font-family: var(--zh); font-size: 16px; }
-  .result-foot {
-    padding: 8px 14px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .result-meta { font-size: 11px; font-family: var(--mono); color: var(--text3); }
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+@media(max-width:560px){.panels{grid-template-columns:1fr;}}
+.panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;}
+.panel-head{display:flex;align-items:center;justify-content:space-between;padding:9px 13px;border-bottom:1px solid var(--border);}
+.lang-badge{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--text);}
+.flag{font-size:17px;}
+.char-ct{font-size:11px;font-family:var(--mono);color:var(--text3);}
+textarea{flex:1;background:transparent;border:none;outline:none;resize:none;font-size:15px;font-family:var(--sans);line-height:1.65;color:var(--text);padding:13px;min-height:130px;caret-color:var(--accent);}
+textarea::placeholder{color:var(--text3);}
+textarea.zh-font{font-family:var(--zh);}
+.panel-foot{padding:8px 13px;border-top:1px solid var(--border);display:flex;align-items:center;gap:8px;}
 
-  /* BUTTONS */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 12px;
-    font-family: var(--sans);
-    font-weight: 500;
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: 1px solid var(--border2);
-    background: transparent;
-    color: var(--text2);
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
-  .btn:hover { background: var(--bg3); color: var(--text); border-color: var(--border2); }
-  .btn:active { transform: scale(0.97); }
-  .btn.primary {
-    background: var(--accent);
-    color: #0f0f0f;
-    border-color: var(--accent);
-    font-weight: 600;
-    flex: 1;
-    justify-content: center;
-  }
-  .btn.primary:hover { background: var(--accent2); border-color: var(--accent2); color: #0f0f0f; }
-  .btn.sm { padding: 4px 9px; font-size: 11px; border-radius: 4px; }
-  .btn.icon { padding: 4px 8px; }
-  .btn.success { background: rgba(74,200,138,0.12); border-color: rgba(74,200,138,0.3); color: var(--green); }
+.result-panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;display:none;}
+.result-panel.visible{display:block;}
+.result-head{display:flex;align-items:center;justify-content:space-between;padding:9px 13px;border-bottom:1px solid var(--border);background:var(--bg3);}
+.result-body{padding:13px;font-size:15px;line-height:1.7;min-height:56px;white-space:pre-wrap;word-break:break-word;}
+.result-body.zh-font{font-family:var(--zh);font-size:16px;}
+.result-foot{padding:7px 13px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.result-meta{font-size:11px;font-family:var(--mono);color:var(--text3);}
 
-  /* QUICK PHRASES */
-  .qp-section { margin-bottom: 12px; }
-  .qp-label {
-    font-size: 11px;
-    font-family: var(--mono);
-    color: var(--text3);
-    margin-bottom: 7px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .qp-scroll {
-    display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    scrollbar-width: none;
-  }
-  .qp-scroll::-webkit-scrollbar { display: none; }
-  .qp-chip {
-    flex-shrink: 0;
-    font-size: 12px;
-    padding: 5px 11px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    cursor: pointer;
-    color: var(--text2);
-    background: var(--bg3);
-    white-space: nowrap;
-    transition: all 0.15s;
-  }
-  .qp-chip:hover { border-color: var(--accent); color: var(--accent); }
+.btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-family:var(--sans);font-weight:500;padding:6px 12px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.btn:hover{background:var(--bg3);color:var(--text);}
+.btn:active{transform:scale(0.97);}
+.btn.primary{background:var(--accent);color:#0f0f0f;border-color:var(--accent);font-weight:600;flex:1;justify-content:center;font-size:13px;}
+.btn.primary:hover{background:var(--accent2);border-color:var(--accent2);}
+.btn.sm{padding:4px 9px;font-size:11px;border-radius:4px;}
+.btn.icon{padding:5px 9px;font-size:13px;}
+.btn.success{background:rgba(74,200,138,0.12);border-color:rgba(74,200,138,0.3);color:var(--green);}
 
-  /* HISTORY */
-  .history-section { margin-top: 14px; display: none; }
-  .history-section.visible { display: block; }
-  .section-label {
-    font-size: 11px;
-    font-family: var(--mono);
-    color: var(--text3);
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .history-item {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 10px 14px;
-    margin-bottom: 6px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .h-side { font-size: 13px; line-height: 1.5; }
-  .h-lang { font-size: 10px; font-family: var(--mono); color: var(--text3); margin-bottom: 3px; }
-  .h-text { color: var(--text2); word-break: break-word; }
+.history-section{display:none;}
+.history-section.visible{display:block;}
+.divider{height:1px;background:var(--border);margin:14px 0;}
+.section-label{font-size:11px;font-family:var(--mono);color:var(--text3);margin-bottom:8px;}
+.history-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 13px;margin-bottom:6px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.h-side{font-size:13px;line-height:1.5;}
+.h-lang{font-size:10px;font-family:var(--mono);color:var(--text3);margin-bottom:3px;}
+.h-text{color:var(--text2);word-break:break-word;}
 
-  /* LOADING */
-  .loading-wrap { display: flex; align-items: center; gap: 8px; padding: 14px; color: var(--text3); font-size: 13px; font-family: var(--mono); }
-  .spinner { display: flex; gap: 3px; }
-  .spinner span { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: bounce 1.2s infinite; }
-  .spinner span:nth-child(2) { animation-delay: 0.15s; }
-  .spinner span:nth-child(3) { animation-delay: 0.3s; }
-  @keyframes bounce { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }
+.loading-wrap{display:flex;align-items:center;gap:8px;padding:13px;color:var(--text3);font-size:13px;font-family:var(--mono);}
+.spinner{display:flex;gap:3px;}
+.spinner span{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:bounce 1.2s infinite;}
+.spinner span:nth-child(2){animation-delay:0.15s;}
+.spinner span:nth-child(3){animation-delay:0.3s;}
+@keyframes bounce{0%,80%,100%{transform:scale(0.6);opacity:0.4}40%{transform:scale(1);opacity:1}}
 
-  /* DIVIDER */
-  .divider { height: 1px; background: var(--border); margin: 14px 0; }
-
-  /* NOTIFY */
-  #notify {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: var(--bg3);
-    border: 1px solid var(--border2);
-    color: var(--text);
-    font-size: 13px;
-    padding: 8px 18px;
-    border-radius: 20px;
-    opacity: 0;
-    transition: all 0.2s;
-    pointer-events: none;
-    white-space: nowrap;
-    z-index: 9999;
-    font-family: var(--mono);
-  }
-  #notify.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+#notify{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg3);border:1px solid var(--border2);color:var(--text);font-size:13px;padding:8px 18px;border-radius:20px;opacity:0;transition:all 0.2s;pointer-events:none;white-space:nowrap;z-index:9999;font-family:var(--mono);}
+#notify.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
@@ -365,7 +106,7 @@
     <div class="logo-icon">TX</div>
     <div>
       <div class="logo-text">BizTranslate</div>
-      <div class="logo-sub">ID ↔ 中文 · Smart Input</div>
+      <div class="logo-sub">ID ↔ 中文 · Smart Input · Gratis</div>
     </div>
   </div>
   <div class="status-pill">
@@ -376,31 +117,26 @@
 
 <main>
 
-  <!-- SMART BAR -->
   <div class="smart-bar" id="smartBar">
     <span class="smart-label">✦ koreksi:</span>
     <div class="smart-chips" id="smartChips">
-      <span style="color:var(--text3); font-size:12px; font-family:var(--mono)">mulai ketik untuk deteksi otomatis...</span>
+      <span style="color:var(--text3);font-size:12px;font-family:var(--mono)">mulai ketik untuk deteksi otomatis...</span>
     </div>
   </div>
 
-  <!-- QUICK PHRASES -->
-  <div class="qp-section">
-    <div class="qp-label">⚡ frasa cepat bisnis</div>
-    <div class="qp-scroll" id="qpScroll"></div>
-  </div>
+  <div class="qp-label">⚡ frasa cepat bisnis</div>
+  <div class="qp-scroll" id="qpScroll"></div>
 
-  <!-- PANELS -->
   <div class="panels">
     <div class="panel">
       <div class="panel-head">
         <div class="lang-badge"><span class="flag">🇮🇩</span> Indonesia</div>
         <span class="char-ct" id="idCount">0</span>
       </div>
-      <textarea id="idInput" placeholder="Ketik disini...&#10;mgkn, sprepart, maldm, stlh, dll — langsung dipahami"></textarea>
+      <textarea id="idInput" placeholder="Ketik disini...&#10;mgkn, sprepart, maldm, stlh — langsung dipahami"></textarea>
       <div class="panel-foot">
-        <button class="btn primary" onclick="translate('id-zh')">Terjemahkan → 中文</button>
-        <button class="btn icon" onclick="clearId()" title="Hapus">✕</button>
+        <button class="btn primary" id="btnIdToZh">Terjemahkan → 中文</button>
+        <button class="btn icon" id="btnClearId" title="Hapus">✕</button>
       </div>
     </div>
 
@@ -411,19 +147,18 @@
       </div>
       <textarea id="zhInput" class="zh-font" placeholder="粘贴中文到这里...&#10;直接翻译成印尼语"></textarea>
       <div class="panel-foot">
-        <button class="btn primary" onclick="translate('zh-id')">← Terjemahkan ke ID</button>
-        <button class="btn icon" onclick="clearZh()" title="Hapus">✕</button>
+        <button class="btn primary" id="btnZhToId">← Terjemahkan ke ID</button>
+        <button class="btn icon" id="btnClearZh" title="Hapus">✕</button>
       </div>
     </div>
   </div>
 
-  <!-- RESULT -->
   <div class="result-panel" id="resultPanel">
     <div class="result-head">
       <div class="lang-badge" id="resultLang"></div>
       <div style="display:flex;gap:6px">
-        <button class="btn sm" id="btnCopy" onclick="copyResult()">⎘ Salin</button>
-        <button class="btn sm" onclick="useAsInput()">↩ Gunakan</button>
+        <button class="btn sm" id="btnCopy">⎘ Salin</button>
+        <button class="btn sm" id="btnUse">↩ Gunakan</button>
       </div>
     </div>
     <div id="resultBody" class="result-body"></div>
@@ -433,7 +168,6 @@
     </div>
   </div>
 
-  <!-- HISTORY -->
   <div class="history-section" id="histSection">
     <div class="divider"></div>
     <div class="section-label">⟳ riwayat sesi ini</div>
@@ -445,187 +179,150 @@
 <div id="notify"></div>
 
 <script>
-// ============================================================
-// SMART NORMALIZER — typo/singkatan/slang Indonesia
-// ============================================================
-const singkatan = {
-  // umum
-  'mgkn':'mungkin','mungkn':'mungkin','mnkn':'mungkin',
-  'utk':'untuk','tuk':'untuk',
+// ── SINGKATAN & TYPO ──────────────────────────────────────
+const DICT = {
+  'mgkn':'mungkin','mungkn':'mungkin','mnkn':'mungkin','mkin':'mungkin',
+  'utk':'untuk','tuk':'untuk','utuk':'untuk',
   'yg':'yang','yng':'yang',
-  'dgn':'dengan','dng':'dengan','dg':'dengan',
-  'krn':'karena','karna':'karena','krna':'karena',
-  'sdh':'sudah','udh':'sudah','udah':'sudah',
-  'blm':'belum','belom':'belum',
-  'jg':'juga','juga':'juga',
-  'tp':'tapi','tpi':'tapi',
-  'kl':'kalau','klo':'kalau','kalo':'kalau','klau':'kalau',
-  'bs':'bisa','bsa':'bisa',
+  'dgn':'dengan','dng':'dengan','dngan':'dengan',
+  'krn':'karena','karna':'karena','krna':'karena','kren':'karena',
+  'sdh':'sudah','udh':'sudah','udah':'sudah','sudh':'sudah',
+  'blm':'belum','belom':'belum','blum':'belum',
+  'jg':'juga','jga':'juga',
+  'tp':'tapi','tpi':'tapi','ttpi':'tapi',
+  'kl':'kalau','klo':'kalau','kalo':'kalau','klau':'kalau','kalu':'kalau',
+  'bs':'bisa','bsa':'bisa','bissa':'bisa',
   'sm':'sama','sma':'sama',
   'dr':'dari','dri':'dari',
-  'ke':'ke','pd':'pada','pd':'pada',
-  'hrs':'harus','hrus':'harus',
+  'hrs':'harus','hrus':'harus','haurs':'harus',
   'lg':'lagi','lgi':'lagi',
-  'sdg':'sedang','lg':'lagi',
+  'sdg':'sedang','sdng':'sedang',
   'bgt':'banget','bngt':'banget','bgtt':'banget',
-  'gk':'tidak','ga':'tidak','g':'tidak','tdk':'tidak','tdk':'tidak','nggak':'tidak','ngga':'tidak','gak':'tidak',
+  'gk':'tidak','ga':'tidak','gak':'tidak','ngga':'tidak','nggak':'tidak',
+  'tdk':'tidak','tdak':'tidak','tdk':'tidak',
   'aja':'saja','aj':'saja',
   'nih':'ini','ni':'ini',
   'tuh':'itu','tu':'itu',
-  'sy':'saya','sy':'saya',
-  'km':'kamu','lo':'kamu',
+  'sy':'saya','sya':'saya',
   'gw':'saya','gue':'saya',
-  'kita':'kita','kt':'kita',
-  'mrk':'mereka',
-  'org':'orang',
-  'tgl':'tanggal','tggl':'tanggal',
-  'bln':'bulan','blan':'bulan',
-  'thn':'tahun','thn':'tahun',
-  'hr':'hari','hri':'hari',
-  'jam':'jam','jm':'jam',
-  'mnt':'menit','mnit':'menit',
-  'dtg':'datang','dtng':'datang',
-  'prgi':'pergi','prg':'pergi',
-  'krj':'kerja','kerja':'kerja',
-  'ktr':'kantor',
-  'rmh':'rumah','rmah':'rumah',
-  'jln':'jalan','jl':'jalan',
-  'tlp':'telepon','tlpon':'telepon','tlpn':'telepon','telp':'telepon','telfon':'telepon',
-  'wa':'whatsapp','wha':'whatsapp',
-  'info':'informasi',
-  'mkn':'makan','mkan':'makan',
-  'mnum':'minum','mnum':'minum',
-  // sapaan waktu
-  'pgi':'pagi','pagi':'pagi',
-  'siang':'siang','sing':'siang',
-  'sore':'sore','sor':'sore',
-  'maldm':'malam','mlm':'malam','malm':'malam','malem':'malam',
-  'malam':'malam',
-  // bisnis & teknis
-  'sprepart':'sparepart','sparpart':'sparepart','sperpart':'sparepart','sprpart':'sparepart',
-  'sparepart':'sparepart',
-  'unit':'unit',
-  'hrg':'harga','harg':'harga',
-  'stk':'stok','stock':'stok',
-  'ord':'order','odr':'order',
-  'po':'purchase order','p/o':'purchase order',
-  'do':'delivery order','d/o':'delivery order',
-  'inv':'invoice','invois':'invoice',
-  'dp':'down payment','downpayment':'down payment',
-  'lns':'lunas',
-  'pmbyrn':'pembayaran','pembyrn':'pembayaran','pmbayaran':'pembayaran',
-  'trf':'transfer',
-  'rek':'rekening',
-  'konfirm':'konfirmasi','konfm':'konfirmasi','knfrmsi':'konfirmasi',
-  'pengiriman':'pengiriman','pengrmn':'pengiriman','pngrman':'pengiriman',
-  'estimasi':'estimasi','etd':'estimasi tiba','eta':'estimasi tiba',
-  'sertifikasi':'sertifikasi','srtfikasi':'sertifikasi',
-  'garansi':'garansi','grns':'garansi','garnsi':'garansi',
-  'kontrak':'kontrak','kntrk':'kontrak','kontark':'kontrak',
-  'spesifikasi':'spesifikasi','spek':'spesifikasi','spck':'spesifikasi',
-  'kapasitas':'kapasitas','kpsts':'kapasitas',
-  'teknis':'teknis','tknsi':'teknis',
-  'jdwl':'jadwal','jadal':'jadwal','jadwl':'jadwal',
-  'sch':'schedule','skedule':'jadwal',
-  'meeting':'pertemuan','mting':'pertemuan','mtng':'pertemuan',
-  'negosiasi':'negosiasi','nego':'negosiasi','ngo':'negosiasi',
-  'penawaran':'penawaran','pnwrn':'penawaran',
-  'qlty':'kualitas','qty':'kuantitas','kualitas':'kualitas',
-  'moh':'mohon','mhn':'mohon',
+  'moh':'mohon','mhn':'mohon','mohon':'mohon',
   'tlng':'tolong','tlg':'tolong',
-  'terima kasih':'terima kasih','tks':'terima kasih','thx':'terima kasih','tx':'terima kasih','mksh':'makasih','makasih':'terima kasih',
-  'stlh':'setelah','stlah':'setelah',
-  'sblm':'sebelum','sblum':'sebelum',
-  'smpai':'sampai','smp':'sampai','smpe':'sampai',
-  'ttg':'tentang','tntg':'tentang',
-  'dg':'dengan','dngan':'dengan',
-  'krjsm':'kerjasama','kerjsm':'kerjasama',
-  'pihak':'pihak','pihk':'pihak',
-  'srt':'surat',
-  'dok':'dokumen','dokumen':'dokumen',
+  'tks':'terima kasih','thx':'terima kasih','tx':'terima kasih',
+  'mksh':'makasih','makasih':'terima kasih','trimakasih':'terima kasih',
+  'stlh':'setelah','stlah':'setelah','stelah':'setelah',
+  'sblm':'sebelum','sblum':'sebelum','sebelm':'sebelum',
+  'smpai':'sampai','smp':'sampai','smpe':'sampai','sampe':'sampai',
+  'ttg':'tentang','tntg':'tentang','tntang':'tentang',
+  'org':'orang','oran':'orang',
+  'tgl':'tanggal','tggl':'tanggal','tangggl':'tanggal',
+  'bln':'bulan','blan':'bulan',
+  'thn':'tahun','thun':'tahun',
+  'hr':'hari','hri':'hari',
+  'jm':'jam',
+  'mnt':'menit','mnit':'menit',
+  'tlp':'telepon','tlpon':'telepon','tlpn':'telepon',
+  'telp':'telepon','telfon':'telepon','telpon':'telepon',
+  'pgi':'pagi','pgi':'pagi',
+  'siang':'siang','sing':'siang',
+  'sore':'sore',
+  'maldm':'malam','mlm':'malam','malm':'malam','malem':'malam',
+  // bisnis
+  'sprepart':'sparepart','sparpart':'sparepart','sperpart':'sparepart',
+  'sprpart':'sparepart','sparepat':'sparepart','sprepat':'sparepart',
+  'hrg':'harga','harg':'harga','hrga':'harga',
+  'stk':'stok','stck':'stok',
+  'ord':'order','odr':'order',
+  'po':'purchase order',
+  'do':'delivery order',
+  'inv':'invoice','invois':'invoice','invoic':'invoice',
+  'dp':'down payment','downpayment':'down payment',
+  'lns':'lunas','lunas':'lunas',
+  'pmbyrn':'pembayaran','pembyrn':'pembayaran','pmbayaran':'pembayaran',
+  'trf':'transfer','tranfer':'transfer',
+  'rek':'rekening','rekening':'rekening',
+  'konfirm':'konfirmasi','konfm':'konfirmasi','knfrmsi':'konfirmasi',
+  'konfirmasi':'konfirmasi',
+  'pengrmn':'pengiriman','pngrman':'pengiriman','pengirman':'pengiriman',
+  'etd':'estimasi tiba','eta':'estimasi tiba',
+  'grns':'garansi','garnsi':'garansi','garnsai':'garansi',
+  'kntrk':'kontrak','kontark':'kontrak','konrak':'kontrak',
+  'spek':'spesifikasi','spck':'spesifikasi','spesifkasi':'spesifikasi',
+  'kpsts':'kapasitas','kapastas':'kapasitas',
+  'jdwl':'jadwal','jadal':'jadwal','jadwl':'jadwal',
+  'mtng':'pertemuan','mting':'pertemuan',
+  'nego':'negosiasi','ngo':'negosiasi','negoo':'negosiasi',
+  'pnwrn':'penawaran','penwaran':'penawaran',
+  'qlty':'kualitas','qty':'kuantitas',
+  'rev':'revisi','revsi':'revisi',
+  'fu':'tindak lanjut','f/u':'tindak lanjut',
+  'acc':'disetujui',
   'ttd':'tanda tangan',
-  'acc':'disetujui','approved':'disetujui',
-  'revisi':'revisi','rev':'revisi',
-  'update':'pembaruan','updt':'pembaruan',
-  'follow up':'tindak lanjut','fu':'tindak lanjut','f/u':'tindak lanjut',
+  'dok':'dokumen','dokmen':'dokumen',
+  'srt':'surat',
+  'updt':'pembaruan',
+  'kerjsm':'kerjasama','krjsm':'kerjasama',
+  'min':'minimum','maks':'maksimum','max':'maksimum',
+  'tknsi':'teknis','tenis':'teknis',
+  'srtfikasi':'sertifikasi','sertfikasi':'sertifikasi',
 };
 
-function normalizeText(text) {
+function doNormalize(text) {
   const corrections = [];
-  let result = text;
-  
-  // tokenize by words, preserve punctuation spacing
-  const words = text.split(/(\s+|(?=[,\.!?;:])|(?<=[,\.!?;:]))/);
-  const normalized = words.map(word => {
-    const trimmed = word.trim().toLowerCase().replace(/[,\.!?;:]$/,'');
-    const suffix = word.match(/[,\.!?;:]$/) ? word.match(/[,\.!?;:]$/)[0] : '';
-    if (singkatan[trimmed]) {
-      const fixed = singkatan[trimmed];
-      // preserve original case style
-      let out;
-      if (word[0] === word[0].toUpperCase() && word[0].match(/[A-Z]/)) {
-        out = fixed.charAt(0).toUpperCase() + fixed.slice(1);
-      } else {
-        out = fixed;
+  const tokens = text.split(/\b/);
+  const out = tokens.map(tok => {
+    const low = tok.toLowerCase();
+    if (DICT[low]) {
+      const fixed = DICT[low];
+      if (low !== fixed) {
+        corrections.push({ from: low, to: fixed });
+        // preserve leading capital
+        return tok[0] && tok[0] === tok[0].toUpperCase() && tok[0].match(/[A-Za-z]/)
+          ? fixed.charAt(0).toUpperCase() + fixed.slice(1)
+          : fixed;
       }
-      if (trimmed !== fixed) {
-        corrections.push({ from: trimmed, to: fixed });
-      }
-      return out + suffix;
     }
-    return word;
+    return tok;
   });
-  
-  result = normalized.join('');
-  
-  // dedupe corrections
+  // dedupe
   const seen = new Set();
   const unique = corrections.filter(c => {
-    const key = c.from+'→'+c.to;
-    if (seen.has(key)) return false;
-    seen.add(key); return true;
+    const k = c.from + c.to;
+    if (seen.has(k)) return false;
+    seen.add(k); return true;
   });
-  
-  return { text: result, corrections: unique };
+  return { text: out.join(''), corrections: unique };
 }
 
-// ============================================================
-// SMART BAR UI
-// ============================================================
-let debounceTimer;
+// ── SMART BAR ─────────────────────────────────────────────
+let debTimer;
 document.getElementById('idInput').addEventListener('input', function() {
-  updateCount('id');
-  clearTimeout(debounceTimer);
-  debounceTimer = setTimeout(() => updateSmartBar(this.value), 300);
+  updCount('id');
+  clearTimeout(debTimer);
+  debTimer = setTimeout(() => updateSmartBar(this.value), 280);
 });
-document.getElementById('zhInput').addEventListener('input', () => updateCount('zh'));
+document.getElementById('zhInput').addEventListener('input', () => updCount('zh'));
+
+function updCount(lang) {
+  document.getElementById(lang + 'Count').textContent = document.getElementById(lang + 'Input').value.length;
+}
 
 function updateSmartBar(val) {
-  const { corrections } = normalizeText(val);
+  const { corrections } = doNormalize(val);
   const bar = document.getElementById('smartBar');
   const chips = document.getElementById('smartChips');
-  
-  if (corrections.length === 0) {
+  if (!corrections.length) {
     bar.classList.remove('active');
     chips.innerHTML = '<span style="color:var(--text3);font-size:12px;font-family:var(--mono)">mulai ketik untuk deteksi otomatis...</span>';
     return;
   }
-  
   bar.classList.add('active');
-  chips.innerHTML = corrections.slice(0,8).map(c =>
-    `<span class="smart-chip"><span>${c.from}</span><span class="arrow">→</span><span class="fixed">${c.to}</span></span>`
+  chips.innerHTML = corrections.slice(0, 8).map(c =>
+    `<span class="smart-chip"><span>${c.from}</span><span class="arr">→</span><span class="fix">${c.to}</span></span>`
   ).join('');
 }
 
-function updateCount(lang) {
-  const val = document.getElementById(lang + 'Input').value;
-  document.getElementById(lang + 'Count').textContent = val.length;
-}
-
-// ============================================================
-// QUICK PHRASES
-// ============================================================
-const phrases = [
+// ── QUICK PHRASES ─────────────────────────────────────────
+const PHRASES = [
   'Harga sudah termasuk pajak?',
   'Kapan pengiriman bisa dilakukan?',
   'Mohon kirim penawaran resmi.',
@@ -639,49 +336,54 @@ const phrases = [
   'Estimasi tiba berapa hari?',
   'Apakah bisa nego harga?',
   'Follow up pengiriman kemarin.',
-  'Dokumen sudah kami tandatangani.',
+  'Dokumen sudah kami tanda tangani.',
 ];
-
-const qpScroll = document.getElementById('qpScroll');
-phrases.forEach(p => {
+const qpEl = document.getElementById('qpScroll');
+PHRASES.forEach(p => {
   const c = document.createElement('div');
   c.className = 'qp-chip';
   c.textContent = p;
-  c.onclick = () => {
+  c.addEventListener('click', () => {
     document.getElementById('idInput').value = p;
-    updateCount('id');
+    updCount('id');
     updateSmartBar(p);
-    translate('id-zh');
-  };
-  qpScroll.appendChild(c);
+    doTranslate('id-zh');
+  });
+  qpEl.appendChild(c);
 });
 
-// ============================================================
-// TRANSLATE
-// ============================================================
-let lastResult = '', lastDir = '', lastCleaned = '';
+// ── GOOGLE TRANSLATE (gratis, no key) ─────────────────────
+async function googleTranslate(text, from, to) {
+  const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${from}&tl=${to}&dt=t&q=${encodeURIComponent(text)}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const data = await res.json();
+  // gabung semua potongan terjemahan
+  return data[0].map(x => x[0]).join('');
+}
+
+// ── TRANSLATE ─────────────────────────────────────────────
+let lastResult = '', lastDir = '';
 const history = [];
 
 function setStatus(state) {
   const dot = document.getElementById('statusDot');
   const txt = document.getElementById('statusText');
   dot.className = 'dot' + (state === 'loading' ? ' loading' : state === 'error' ? ' error' : '');
-  txt.textContent = state === 'loading' ? 'menerjemahkan...' : state === 'error' ? 'error' : 'siap';
+  txt.textContent = state === 'loading' ? 'menerjemahkan...' : state === 'error' ? 'gagal' : 'siap';
 }
 
-async function translate(dir) {
+async function doTranslate(dir) {
   const isIdZh = dir === 'id-zh';
-  const srcId = isIdZh ? 'idInput' : 'zhInput';
-  const raw = document.getElementById(srcId).value.trim();
+  const srcEl = document.getElementById(isIdZh ? 'idInput' : 'zhInput');
+  const raw = srcEl.value.trim();
   if (!raw) return;
 
-  // normalize if ID→ZH
-  let src = raw;
-  let cleaned = '';
+  let src = raw, cleaned = '';
   if (isIdZh) {
-    const norm = normalizeText(raw);
+    const norm = doNormalize(raw);
     src = norm.text;
-    if (norm.corrections.length > 0) {
+    if (norm.corrections.length) {
       cleaned = '✦ ' + norm.corrections.map(c => c.from + '→' + c.to).join(' · ');
     }
   }
@@ -697,58 +399,38 @@ async function translate(dir) {
     ? '<span class="flag">🇨🇳</span> Hasil: 中文 Mandarin'
     : '<span class="flag">🇮🇩</span> Hasil: Indonesia';
   body.className = 'result-body' + (isIdZh ? ' zh-font' : '');
-  body.innerHTML = '<div class="loading-wrap"><div class="spinner"><span></span><span></span><span></span></div> memproses...</div>';
+  body.innerHTML = '<div class="loading-wrap"><div class="spinner"><span></span><span></span><span></span></div> menerjemahkan...</div>';
   meta.textContent = '';
   note.textContent = cleaned;
-  document.getElementById('btnCopy').className = 'btn sm';
   lastDir = dir;
   setStatus('loading');
 
-  const sys = isIdZh
-    ? `Kamu adalah penerjemah profesional Indonesia ke Mandarin (Simplified Chinese) untuk konteks bisnis. Teks yang diberikan sudah dinormalisasi dari singkatan/typo. Terjemahkan secara akurat, natural, formal bisnis (trading, teknis, legal, engineering). Hanya berikan hasil terjemahan saja tanpa penjelasan.`
-    : `你是一位专业的商务翻译，将中文（简体）翻译成印度尼西亚语。请准确、自然、正式地翻译（商贸、技术、法律、工程）。只提供翻译结果，不添加任何解释。`;
-
   const t0 = Date.now();
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: sys,
-        messages: [{ role: 'user', content: src }]
-      })
-    });
-    const data = await res.json();
-    const out = data.content?.[0]?.text?.trim() || '— gagal —';
+    const from = isIdZh ? 'id' : 'zh-CN';
+    const to   = isIdZh ? 'zh-CN' : 'id';
+    const result = await googleTranslate(src, from, to);
     const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
 
-    body.textContent = out;
-    meta.textContent = elapsed + 's · AI bisnis';
-    lastResult = out;
-    lastCleaned = cleaned;
+    body.textContent = result;
+    meta.textContent = elapsed + 's · Google Translate';
+    lastResult = result;
     setStatus('ready');
-    document.getElementById('btnCopy').className = 'btn sm';
 
-    history.unshift({
-      dir,
-      src: raw,
-      cleaned,
-      translated: out,
-      ts: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
-    });
+    const btnCopy = document.getElementById('btnCopy');
+    btnCopy.className = 'btn sm';
+    btnCopy.textContent = '⎘ Salin';
+
+    history.unshift({ dir, src: raw, cleaned, translated: result, ts: new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}) });
     if (history.length > 15) history.pop();
     renderHistory();
   } catch(e) {
-    body.textContent = '⚠ Koneksi gagal. Coba lagi.';
+    body.textContent = '⚠ Gagal menerjemahkan. Periksa koneksi internet.';
     setStatus('error');
   }
 }
 
-// ============================================================
-// HISTORY
-// ============================================================
+// ── HISTORY ───────────────────────────────────────────────
 function renderHistory() {
   const sec = document.getElementById('histSection');
   const list = document.getElementById('histList');
@@ -758,25 +440,33 @@ function renderHistory() {
     const isIdZh = h.dir === 'id-zh';
     return `<div class="history-item">
       <div class="h-side">
-        <div class="h-lang">${isIdZh ? '🇮🇩 ID' : '🇨🇳 ZH'} · ${h.ts}${h.cleaned ? ' · <span style="color:var(--accent);font-size:10px">' + h.cleaned.slice(0,40) + '</span>' : ''}</div>
+        <div class="h-lang">${isIdZh?'🇮🇩 ID':'🇨🇳 ZH'} · ${h.ts}</div>
         <div class="h-text">${esc(h.src)}</div>
       </div>
       <div class="h-side">
-        <div class="h-lang">${isIdZh ? '🇨🇳 ZH' : '🇮🇩 ID'}</div>
-        <div class="h-text" style="font-family:${isIdZh ? 'var(--zh)' : 'var(--sans)'}">${esc(h.translated)}</div>
+        <div class="h-lang">${isIdZh?'🇨🇳 ZH':'🇮🇩 ID'}</div>
+        <div class="h-text" style="font-family:${isIdZh?'var(--zh)':'var(--sans)'}">${esc(h.translated)}</div>
       </div>
     </div>`;
   }).join('');
 }
 
-function esc(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-// ============================================================
-// UTILS
-// ============================================================
-function copyResult() {
+// ── EVENT LISTENERS ───────────────────────────────────────
+document.getElementById('btnIdToZh').addEventListener('click', () => doTranslate('id-zh'));
+document.getElementById('btnZhToId').addEventListener('click', () => doTranslate('zh-id'));
+
+document.getElementById('btnClearId').addEventListener('click', () => {
+  document.getElementById('idInput').value = '';
+  updCount('id'); updateSmartBar('');
+});
+document.getElementById('btnClearZh').addEventListener('click', () => {
+  document.getElementById('zhInput').value = '';
+  updCount('zh');
+});
+
+document.getElementById('btnCopy').addEventListener('click', () => {
   if (!lastResult) return;
   navigator.clipboard.writeText(lastResult).then(() => {
     const btn = document.getElementById('btnCopy');
@@ -784,43 +474,26 @@ function copyResult() {
     btn.textContent = '✓ Disalin!';
     setTimeout(() => { btn.className = 'btn sm'; btn.textContent = '⎘ Salin'; }, 2000);
   });
-}
+});
 
-function useAsInput() {
+document.getElementById('btnUse').addEventListener('click', () => {
   if (!lastResult) return;
   if (lastDir === 'id-zh') {
     document.getElementById('zhInput').value = lastResult;
-    updateCount('zh');
+    updCount('zh');
   } else {
     document.getElementById('idInput').value = lastResult;
-    updateCount('id');
+    updCount('id');
     updateSmartBar(lastResult);
   }
-}
+});
 
-function clearId() {
-  document.getElementById('idInput').value = '';
-  updateCount('id');
-  updateSmartBar('');
-}
-function clearZh() {
-  document.getElementById('zhInput').value = '';
-  updateCount('zh');
-}
-
-function showNotify(msg) {
-  const el = document.getElementById('notify');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 2200);
-}
-
-// keyboard shortcut: Ctrl+Enter to translate
+// Ctrl+Enter shortcut
 document.addEventListener('keydown', e => {
   if (e.ctrlKey && e.key === 'Enter') {
-    const active = document.activeElement;
-    if (active.id === 'idInput') translate('id-zh');
-    else if (active.id === 'zhInput') translate('zh-id');
+    const a = document.activeElement;
+    if (a.id === 'idInput') doTranslate('id-zh');
+    else if (a.id === 'zhInput') doTranslate('zh-id');
   }
 });
 </script>
